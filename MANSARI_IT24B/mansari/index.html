@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Log Applet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .applet-container {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #logArea {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Main Log Applet</h1>
+    <div class="applet-container">
+        <button onclick="addLog()">Add Log</button>
+        <div id="logArea"></div>
+        <p id="countLabel">Total Logs: 0</p>
+    </div>
+
+    <h2>Navigate to Other Applets</h2>
+    <p>
+        <a href="applet-1.html">Go to Applet 1</a><br>
+        <a href="applet-2.html">Go to Applet 2</a>
+    </p>
+
+    <script>
+        const logs = [];
+
+        function addLog() {
+            const logEntry = "Log Entry on " + new Date().toLocaleString();
+            logs.push(logEntry);
+            updateLogDisplay();
+            saveLogs();
+        }
+
+        function updateLogDisplay() {
+            const logArea = document.getElementById('logArea');
+            const countLabel = document.getElementById('countLabel');
+            logArea.textContent = logs.join('\n');
+            countLabel.textContent = "Total Logs: " + logs.length;
+        }
+
+        function saveLogs() {
+            const json = JSON.stringify(logs);
+            
+            console.log("Saved Logs:", json);
+        }
+    </script>
+</body>
+</html>
